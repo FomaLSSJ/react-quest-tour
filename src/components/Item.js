@@ -1,13 +1,15 @@
-import { find } from 'lodash'
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { Container, List, Segment } from 'semantic-ui-react'
 import Title from './Title'
+import Store from '../services/store'
+import constants from '../constants'
 
 export default class ItemComponent extends Component {
   render() {
     const id = this.props.match.params.id
-    const item = find(this.props.items, x => Number(id) === Number(x.id))
+    const item = Store.getValueById(constants.questions_key, id)
+    console.log(item)
 
     return (
       <Container>
@@ -17,7 +19,7 @@ export default class ItemComponent extends Component {
                 <h2>{ item.text }</h2>
                 { item.answers
                   ? <List ordered>
-                      { item.answers.map(x => <Link to={ `/item/${ x.next }` }>
+                      { item.answers.map((x, i) => <Link key={ i } to={ `/item/${ x.next }` }>
                           <List.Item>{ x.text }</List.Item>
                         </Link>)
                       }

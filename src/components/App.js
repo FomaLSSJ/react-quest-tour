@@ -18,7 +18,7 @@ export default class App extends Component {
   render() {
     return (
       <Router>
-        <Segment basic>
+        <Segment basic style={{ height: '100%' }}>
           <Route exact
             path='/'
             render={ (props) => <Home {...props} items={ this.state.items } /> } />
